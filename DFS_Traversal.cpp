@@ -30,16 +30,13 @@ public:
         }
     }
 
-    void dfsTraversal(int source, unordered_map<int, bool> &visited)
-    {
+    void dfsTraversal(int source, unordered_map<int, bool> &visited){
         // Solve one case
         visited[source] = true;
         cout << source << " ";
         // Rest recursion will handle
-        for (auto neighbour : adjList[source])
-        {
-            if (!visited[neighbour])
-            {
+        for (auto neighbour : adjList[source]){
+            if (!visited[neighbour]){
                 dfsTraversal(neighbour, visited);
             }
         }
