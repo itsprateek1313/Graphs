@@ -27,12 +27,9 @@ public:
     }
     
     // Topological sort using DFS
-    void topoSortUsingDFS(int source, unordered_map<int, bool> &visited, stack<int>& ans)
-    {
+    void topoSortUsingDFS(int source, unordered_map<int, bool> &visited, stack<int>& ans){
         visited[source] = true;
-        
-        for (auto neighbour : adjList[source])
-        {
+        for (auto neighbour : adjList[source]){
             if (!visited[neighbour])
             {
                 topoSortUsingDFS(neighbour, visited, ans);
