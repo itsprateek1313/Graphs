@@ -21,31 +21,6 @@ public:
             cout << endl;
         }
     }
-
-    // BFS traversal of the graph
-    void bfsTraversal(int source, unordered_map<int, bool> &visited) {
-        queue<int> q;
-        // Initial state
-        q.push(source);
-        visited[source] = true;
-
-        while (!q.empty()) {
-            // Process the current node
-            int frontNode = q.front();
-            q.pop();
-            cout << frontNode << " ";
-
-            // Process the neighbors
-            for (auto neighbour : adjList[frontNode]) {
-                if (!visited[neighbour]) {
-                    q.push(neighbour);
-                    visited[neighbour] = true;
-                }
-            }
-        }
-        cout << endl;
-    }
-
     // Detect cycle using BFS for a specific component
     bool detectCycleUsingBFS(int source, unordered_map<int, bool> &visited) {
         unordered_map<int, int> parent;
@@ -118,12 +93,6 @@ int main() {
     unordered_map<int, bool> visited;
     int n = 10;  // Number of nodes
 
-    cout << "BFS Traversal: " << endl;
-    for (int i = 0; i < n; i++) {
-        if (!visited[i]) {
-            g.bfsTraversal(i, visited);
-        }
-    }
 
     // Detect cycles in the graph
     if (g.detectCycleInDisconnectedGraph()) {
