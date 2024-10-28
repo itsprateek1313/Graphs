@@ -1,18 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Graphs{
+class Graphs
+{
 public:
     unordered_map<int, list<pair<int, int>>> adjList;
 
     // Function to add an edge to the graph (only undirected edges)
-    void addEdge(int u, int v, int weight) {
+    void addEdge(int u, int v, int weight)
+    {
         adjList[u].push_back({v, weight});
         adjList[v].push_back({u, weight});
     }
 
     // Function to print the adjacency list
-    void printAdjList(){
+    void printAdjList()
+    {
         for (auto i : adjList)
         {
             cout << i.first << " -> {";
@@ -25,19 +28,22 @@ public:
     }
 
     // BFS traversal of the graph
-    void bfsTraversal(int source, unordered_map<int, bool> &visited){
+    void bfsTraversal(int source, unordered_map<int, bool> &visited)
+    {
 
         queue<int> q;
         // Initial State
         q.push(source);
         visited[source] = true;
-        while (!q.empty()){
+        while (!q.empty())
+        {
             // Process the current node
             int frontNode = q.front();
             q.pop();
             cout << frontNode << " ";
             // Process the neighbors
-            for (auto neighbour : adjList[frontNode]) {
+            for (auto neighbour : adjList[frontNode])
+            {
                 int neighbourData = neighbour.first;
                 if (visited[neighbourData] == false)
                 {
@@ -49,20 +55,25 @@ public:
         cout << endl;
     }
 
-    void dfsTraversal(int source, unordered_map<int, bool> &visited){
+    void dfsTraversal(int source, unordered_map<int, bool> &visited)
+    {
         // Solve one case
         visited[source] = true;
         cout << source << " ";
         // Rest recursion will handle
-        for (auto neighbour : adjList[source]){
+        for (auto neighbour : adjList[source])
+        {
             int neighbourData = neighbour.first;
-            if (visited[neighbourData] == false){
+            if (visited[neighbourData] == false)
+            {
                 dfsTraversal(neighbourData, visited);
             }
         }
     }
 
     // Is there any path exists between two nodes using DFS --> O(V+E)
+    // unordered_map<int, list<pair<int, int>>> adjList;
+    // u --> {v,weight}
     bool anyPathExists(int source, int destination, unordered_map<int, bool> &visited)
     {
         // BASE CASE
@@ -81,7 +92,8 @@ public:
         return false;
     }
 
-    void pathsBetweenNodes(int source, int destination, unordered_map<int, bool> &visited, vector<int> &currentPath, vector<vector<int>> &paths){
+    void pathsBetweenNodes(int source, int destination, unordered_map<int, bool> &visited, vector<int> &currentPath,
+                           vector<vector<int>> &paths){
         // Add the current node to the path
         currentPath.push_back(source);
         // BASE CASE: If source is equal to destination, add the path to the list of paths
@@ -92,8 +104,7 @@ public:
             // Mark the current node as visited
             visited[source] = true;
             // Explore all unvisited neighbors
-            for (auto neighbour : adjList[source])
-            {
+            for (auto neighbour : adjList[source]){
                 if (!visited[neighbour.first]){
                     pathsBetweenNodes(neighbour.first, destination, visited, currentPath, paths);
                 }
@@ -106,9 +117,7 @@ public:
     }
 };
 
-
-int main()
-{
+int main(){
     Graphs g;
     unordered_map<int, bool> visited;
 
